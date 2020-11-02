@@ -50,6 +50,23 @@ public class QuizItem {
         System.out.println(out);
     }
 
+    public String getQuestion() {
+        return this.question;
+    }
+
+    public String getOpt(int index) {
+        int optCode = this.options.get(index);
+        if (optCode == -1)
+            return this.answer;
+        else
+            return this.error.get(optCode);
+    }
+
+    public Boolean isRightAns(int index) {
+        int optCode = this.options.get(index);
+        return (optCode == -1);
+    }
+
     //code for testing
     public static void main(String[] args) {
         QuizItem item = new QuizItem("easy");
