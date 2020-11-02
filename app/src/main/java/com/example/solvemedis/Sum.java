@@ -1,3 +1,5 @@
+package com.example.solvemedis;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -11,7 +13,7 @@ public class Sum {
     List<String> error;
     public Random rand;
 
-    Sum(Integer bound) {
+    public Sum(Integer bound) {
         this.rand = new Random();
         this.bound = bound;
         this.sum = genSum();
@@ -25,7 +27,7 @@ public class Sum {
 
     public int randNextIntLeftGauss() {
         // generate a random int with a distribution like some left half of Gauss
-        double rand = 0.0;
+        double rand;
         // set limits: -2.0 <= rand <= 0.0
         do {
             rand = this.rand.nextGaussian();
@@ -41,8 +43,7 @@ public class Sum {
     }
 
     private Integer genSum() {
-        int genSum = this.randNextIntLeftGauss();
-        return genSum;
+        return this.randNextIntLeftGauss();
     }
 
     private void genSummands() {
