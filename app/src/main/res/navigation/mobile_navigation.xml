@@ -3,23 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_easy">
 
     <fragment
-        android:id="@+id/navigation_home"
+        android:id="@+id/navigation_easy"
         android:name="com.example.solvemedis.ui.home.HomeFragment"
         android:label="@string/title_easy"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_easy" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_normal"
         android:name="com.example.solvemedis.ui.dashboard.DashboardFragment"
         android:label="@string/title_normal"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_normal" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_hard"
         android:name="com.example.solvemedis.ui.notifications.NotificationsFragment"
         android:label="@string/title_hard"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_hard" />
 </navigation>
