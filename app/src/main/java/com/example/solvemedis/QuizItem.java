@@ -67,6 +67,10 @@ public class QuizItem {
         return (optCode == -1);
     }
 
+    public String getAns() {
+        return this.answer;
+    }
+
     //code for testing
     public static void main(String[] args) {
         QuizItem item = new QuizItem("easy");

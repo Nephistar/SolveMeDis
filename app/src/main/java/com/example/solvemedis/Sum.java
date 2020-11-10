@@ -13,14 +13,13 @@ public class Sum {
     List<String> error;
     public Random rand;
 
-    public Sum(Integer bound) {
+    Sum(Integer bound) {
         this.rand = new Random();
         this.bound = bound;
         this.sum = genSum();
         this.summand = new ArrayList<>(5);
         this.genSummands();
-        this.error = new ArrayList<>(5);
-        this.genErr();
+        this.error = genErr();
         this.question = toQuestion();
         this.answer = toAnswer();
     }
@@ -36,9 +35,11 @@ public class Sum {
         // mirror right half of Gauss to left half
         if (rand > 0.0)
             rand = -rand;
-        // limits set; associated function values therefore in limits:
+        // limits set; function values therefore in limits:
         // 0 <= rand <= bound
         rand = this.bound * rand / 2 + this.bound;
+        // add small offset
+        rand += 10;
         return (int) rand;
     }
 
@@ -47,73 +48,23 @@ public class Sum {
     }
 
     private void genSummands() {
-        int genSummand = this.rand.nextInt(this.sum);
+        //first summand: random number smaller than sum
+        int genSummand = this.rand.nextInt(this.sum - 1);
         this.summand.add(genSummand);
+        // second summand: calculate
         genSummand = this.sum - genSummand;
         this.summand.add(genSummand);
     }
 
-    private void genErr() {
-        genErr100();
-    }
-
-    private void genErr100() {
-        int oneSummand = this.summand.get(0);
-        int otherSummand = this.summand.get(1);
-        int unitsDigit = oneSummand % 10;
-        int otherUnitsDigit = otherSummand % 10;
-        int sumUnitsDigit = this.sum % 10;
-        int errorBase = this.sum - sumUnitsDigit;
-
-        int flapError;
-        // error while adding the units digit, especially when adding with carry
-        int flap = 10 - unitsDigit;
-        int otherflap = 10 - otherUnitsDigit;
-        if (otherflap > flap)
-            flapError = errorBase + otherflap;
-        else
-            flapError = errorBase + flap;
-        // check: can't be same as right answer!
-        if (flapError == this.sum)
-            flapError++;
-        this.error.add("" + flapError);
-
-        if (unitsDigit + otherUnitsDigit > 9) {
-            int carryLostError;
-            // error with forgetting the carry
-            carryLostError = this.sum - 10;
-            this.error.add("" + carryLostError);
+    private ArrayList<String> genErr() {
+        CalcError calculator = new CalcError(this.summand.get(0), this.summand.get(1), this.sum);
+        ArrayList<Integer> results = calculator.getResults();
+        ArrayList<String> errorStrings = new ArrayList<>();
+        for (int idx = 0; idx < results.size(); idx++) {
+            String str = results.get(idx).toString();
+            errorStrings.add(str);
         }
-        else {
-            int directionError;
-            // error with subtracting the units digit instead of adding
-            if (otherUnitsDigit < unitsDigit)
-                directionError = this.sum - 2 * otherUnitsDigit;
-            else
-                directionError = this.sum - 2 * unitsDigit;
-            // check: can't be same as right answer!
-            if (directionError == this.sum)
-                directionError--;
-            this.error.add("" + directionError);
-        }
-
-        int swapError;
-        // error with swapping the last two digits, especially when they are similar
-        int tensDigit = (oneSummand % 100) / 10;
-        int otherTensDigit = (otherSummand % 100) / 10;
-        int sumTensDigit = (this.sum % 100) / 10;
-        int swapProb = -Math.abs(tensDigit - unitsDigit);
-        int otherSwapProb = -Math.abs(otherTensDigit - otherUnitsDigit);
-        int sumSwapProb = -Math.abs(sumTensDigit - sumUnitsDigit);
-        if (sumSwapProb > swapProb && sumSwapProb > otherSwapProb && sumSwapProb != 0)
-            swapError = sumUnitsDigit * 10 + sumTensDigit;
-        else if (otherSwapProb > swapProb && otherSwapProb != 0)
-            swapError = oneSummand + otherUnitsDigit * 10 + otherTensDigit;
-        else if (swapProb != 0)
-            swapError = otherSummand + unitsDigit * 10 + tensDigit;
-        else
-            swapError = this.sum - 1;
-        this.error.add("" + swapError);
+        return errorStrings;
     }
 
     private String toQuestion() {
