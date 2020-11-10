@@ -3,4 +3,6 @@
     <string name="title_easy">Easy</string>
     <string name="title_normal">Normal</string>
     <string name="title_hard">Hard</string>
+    <string name="start">Start</string>
+    <string name="back">Back</string>
 </resources>
