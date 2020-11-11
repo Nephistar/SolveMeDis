@@ -69,9 +69,9 @@ public class Substraction {
     }
 */
     private String toQuestion() {
-        String q = "Find the value of the sum!\n";
+        String q = "Find the value of the difference!\n";
         q += this.taskNumbers.get(0);
-        q += " + ";
+        q += " - ";
         q += this.taskNumbers.get(1);
         q += "\n";
         return q;

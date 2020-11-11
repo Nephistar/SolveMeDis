@@ -62,6 +62,12 @@ public class Math_Normal extends AppCompatActivity {
 
             }
         });
+        questionBox = (TextView) findViewById(R.id.question_box_normal);
+        fillQuestion(questionBox);
+        answer_button_1.setText(quizItem.getOpt(0));
+        answer_button_2.setText(quizItem.getOpt(1));
+        answer_button_3.setText(quizItem.getOpt(2));
+        answer_button_4.setText(quizItem.getOpt(3));
     }
 
     public void openHome(){
