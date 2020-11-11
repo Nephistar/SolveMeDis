@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import com.example.solvemedis.QuizItem;
 
 public class Math_Easy extends AppCompatActivity {
     private Button back_button;
@@ -15,12 +16,15 @@ public class Math_Easy extends AppCompatActivity {
     private Button answer_button_3;
     private Button answer_button_4;
     private TextView questionBox;
+    private QuizItem quizItem = new QuizItem("easy"); // generate first question
+    // this has to be global so the button event can check for the answer
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_math__easy);
+        // below all Button events are made and populated
         back_button = (Button) findViewById(R.id.back_from_easy);
         back_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -33,7 +37,7 @@ public class Math_Easy extends AppCompatActivity {
         answer_button_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                checkAnswer();
+                checkAnswer(R.id.easy_answer_button_1);
 
             }
         });
@@ -41,7 +45,7 @@ public class Math_Easy extends AppCompatActivity {
         answer_button_2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                checkAnswer();
+                checkAnswer(R.id.easy_answer_button_2);
 
             }
         });
@@ -49,7 +53,7 @@ public class Math_Easy extends AppCompatActivity {
         answer_button_3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                checkAnswer();
+                checkAnswer(R.id.easy_answer_button_3);
 
             }
         });
@@ -57,18 +61,47 @@ public class Math_Easy extends AppCompatActivity {
         answer_button_4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                checkAnswer();
+                checkAnswer(R.id.easy_answer_button_4);
 
             }
         });
+        questionBox = (TextView) findViewById(R.id.question_box_easy);
+        fillQuestion(questionBox);
+        answer_button_1.setText(quizItem.getOpt(0));
+        answer_button_2.setText(quizItem.getOpt(1));
+        answer_button_3.setText(quizItem.getOpt(2));
+        answer_button_4.setText(quizItem.getOpt(3));
     }
 
-    public void openHome(){
+    public void openHome(){ // change back to home/difficulty select screen
         Intent intent_home = new Intent(this, MainActivity.class);
         startActivity(intent_home);
     }
 
-    public void checkAnswer(){
+    public void checkAnswer(int button){
+        String answer = quizItem.getAns();
+        Button clicked_button = (Button) findViewById(button);
+        if(answer.equals((String)clicked_button.getText())){
+            // correct answer clicked;
+            System.out.println("Points++");
+        }
+        else{
+            // wrong answer clicked
+            System.out.println("No Points");
+        }
+        quizItem = new QuizItem("easy");
+        fillQuestion(questionBox);
+        fillButtons();
+    }
 
+    public void fillQuestion(TextView quest_field){
+        quest_field.setText(quizItem.getQuestion());
+    }
+
+    public void fillButtons(){
+        answer_button_1.setText(quizItem.getOpt(0));
+        answer_button_2.setText(quizItem.getOpt(1));
+        answer_button_3.setText(quizItem.getOpt(2));
+        answer_button_4.setText(quizItem.getOpt(3));
     }
 }
