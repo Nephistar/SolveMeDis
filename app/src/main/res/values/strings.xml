@@ -5,4 +5,9 @@
     <string name="title_hard">Hard</string>
     <string name="start">Start</string>
     <string name="back">Back</string>
+    <string name="empty_quest">Empty Quest Filed, this should not be empty</string>
+    <string name="empty_ans_1">Empty Answer Filed 1</string>
+    <string name="empty_ans_2">Empty Answer Filed 2</string>
+    <string name="empty_ans_3">Empty Answer Filed 3</string>
+    <string name="empty_ans_4">Empty Answer Filed 4</string>
 </resources>
