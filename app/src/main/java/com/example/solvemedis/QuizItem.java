@@ -20,12 +20,19 @@ public class QuizItem {
     }
 
     private void genQ(String diff) {
-        if (diff == "easy") {
+        if (diff.equals("easy")) {
             int sumBound = 100;
             Sum sum = new Sum(sumBound);
             this.question = sum.question;
             this.answer = sum.answer;
             this.error = sum.error;
+        }
+        else if (diff.equals("normal")) {
+            int difBound = 100;
+            Substraction substraction = new Substraction(difBound);
+            this.question = substraction.question;
+            this.answer = substraction.answer;
+            this.error = substraction.error;
         }
     }
 

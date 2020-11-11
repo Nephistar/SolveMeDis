@@ -80,7 +80,7 @@ public class Math_Normal extends AppCompatActivity {
             // wrong answer clicked
             System.out.println("No Points");
         }
-        quizItem = new QuizItem("hard");
+        quizItem = new QuizItem("normal");
         fillQuestion(questionBox);
         fillButtons();
     }
