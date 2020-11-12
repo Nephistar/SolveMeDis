@@ -10,4 +10,7 @@
     <string name="empty_ans_2">Empty Answer Filed 2</string>
     <string name="empty_ans_3">Empty Answer Filed 3</string>
     <string name="empty_ans_4">Empty Answer Filed 4</string>
+    <string name="ok">OK</string>
+    <string name="score">Right: 0</string>
+    <string name="wrong">Wrong: 0</string>
 </resources>

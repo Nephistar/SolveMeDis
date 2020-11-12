@@ -6,22 +6,29 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class Math_Hard extends AppCompatActivity {
     private Button back_button;
     private Button answer_button_1;
-    private Button answer_button_2;
-    private Button answer_button_3;
-    private Button answer_button_4;
     private TextView questionBox;
+    private EditText number_input;
+    private String input_number;
     private QuizItem quizItem = new QuizItem("hard"); // generate first question
     // this has to be global so the button event can check for the answer
+    private int score = 0;
+    private int wrong = 0;
+    private TextView score_screen;
+    private TextView wrong_screen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_math__hard);
+        score_screen = (TextView) findViewById(R.id.score_hard);
+        wrong_screen = (TextView) findViewById(R.id.wrong_normal);
+        number_input = (EditText) findViewById(R.id.number_input_hard);
         back_button = (Button) findViewById(R.id.back_from_hard);
         back_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,30 +45,6 @@ public class Math_Hard extends AppCompatActivity {
 
             }
         });
-        answer_button_2 = (Button) findViewById(R.id.hard_answer_button_2);
-        answer_button_2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                checkAnswer(R.id.hard_answer_button_2);
-
-            }
-        });
-        answer_button_3 = (Button) findViewById(R.id.hard_answer_button_3);
-        answer_button_3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                checkAnswer(R.id.hard_answer_button_3);
-
-            }
-        });
-        answer_button_4 = (Button) findViewById(R.id.hard_answer_button_4);
-        answer_button_4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                checkAnswer(R.id.hard_answer_button_4);
-
-            }
-        });
     }
 
     public void openHome(){
@@ -70,29 +53,40 @@ public class Math_Hard extends AppCompatActivity {
     }
 
     public void checkAnswer(int button){
-        String answer = quizItem.getAns();
-        Button clicked_button = (Button) findViewById(button);
-        if(answer.equals((String)clicked_button.getText())){
+        String given_answer = number_input.getText().toString();
+        if(tryParse(quizItem.getAns(), 1) == (tryParse(given_answer, 0))){
             // correct answer clicked;
-            System.out.println("Points++");
+            score_up();
         }
         else{
             // wrong answer clicked
-            System.out.println("No Points");
+            wrong_up();
         }
         quizItem = new QuizItem("hard");
         fillQuestion(questionBox);
-        fillButtons();
     }
 
     public void fillQuestion(TextView quest_field){
         quest_field.setText(quizItem.getQuestion());
     }
 
-    public void fillButtons(){
-        answer_button_1.setText(quizItem.getOpt(0));
-        answer_button_2.setText(quizItem.getOpt(1));
-        answer_button_3.setText(quizItem.getOpt(2));
-        answer_button_4.setText(quizItem.getOpt(3));
+    public int tryParse(String value, int defaultVal) {
+        try {
+            return Integer.parseInt(value);
+        } catch (NumberFormatException e) {
+            return defaultVal;
+        }
+    }
+
+    public void score_up(){
+        score++;
+        String text_score = "Points "+ score;
+        score_screen.setText(text_score);
+    }
+
+    public void wrong_up(){
+        wrong++;
+        String text_score = "Wrong: "+ wrong;
+        wrong_screen.setText(text_score);
     }
 }

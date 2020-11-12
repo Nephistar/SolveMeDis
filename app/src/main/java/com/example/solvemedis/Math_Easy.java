@@ -18,12 +18,18 @@ public class Math_Easy extends AppCompatActivity {
     private TextView questionBox;
     private QuizItem quizItem = new QuizItem("easy"); // generate first question
     // this has to be global so the button event can check for the answer
+    private int score = 0;
+    private int wrong = 0;
+    private TextView score_screen;
+    private TextView wrong_screen;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_math__easy);
+        score_screen = (TextView) findViewById(R.id.score_easy);
+        wrong_screen = (TextView) findViewById(R.id.wrong_easy);
         // below all Button events are made and populated
         back_button = (Button) findViewById(R.id.back_from_easy);
         back_button.setOnClickListener(new View.OnClickListener() {
@@ -83,11 +89,11 @@ public class Math_Easy extends AppCompatActivity {
         Button clicked_button = (Button) findViewById(button);
         if(answer.equals((String)clicked_button.getText())){
             // correct answer clicked;
-            System.out.println("Points++");
+            score_up();
         }
         else{
             // wrong answer clicked
-            System.out.println("No Points");
+            wrong_up();
         }
         quizItem = new QuizItem("easy");
         fillQuestion(questionBox);
@@ -103,5 +109,17 @@ public class Math_Easy extends AppCompatActivity {
         answer_button_2.setText(quizItem.getOpt(1));
         answer_button_3.setText(quizItem.getOpt(2));
         answer_button_4.setText(quizItem.getOpt(3));
+    }
+
+    public void score_up(){
+        score++;
+        String text_score = "Right: "+ score;
+        score_screen.setText(text_score);
+    }
+
+    public void wrong_up(){
+        wrong++;
+        String text_score = "Wrong: "+ wrong;
+        wrong_screen.setText(text_score);
     }
 }
