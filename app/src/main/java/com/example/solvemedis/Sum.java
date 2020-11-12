@@ -57,7 +57,7 @@ public class Sum {
     }
 
     private ArrayList<String> genErr() {
-        CalcError calculator = new CalcError(this.summand.get(0), this.summand.get(1), this.sum);
+        CalcError calculator = new CalcError(this.summand.get(0), this.summand.get(1), this.sum, "+");
         ArrayList<Integer> results = calculator.getResults();
         ArrayList<String> errorStrings = new ArrayList<>();
         for (int idx = 0; idx < results.size(); idx++) {

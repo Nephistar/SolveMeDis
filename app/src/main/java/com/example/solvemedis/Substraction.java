@@ -11,8 +11,7 @@ public class Substraction {
     private List<Integer> taskNumbers;
     String question;
     String answer;
-    // Test answers, todo: create realistic error numbers
-    List<String> error = new ArrayList<>(Arrays.asList("0", "0", "0"));
+    List<String> error;
     public Random rand;
 
     Substraction(Integer bound) {
@@ -21,7 +20,7 @@ public class Substraction {
         this.taskNumbers = new ArrayList<>(5);
         this.taskNumbers.add(genMinuend());
         this.genSubtrahentDifference();
-        //this.error = genErr();
+        this.error = genErr();
         this.question = toQuestion();
         this.answer = toAnswer();
     }
@@ -56,9 +55,9 @@ public class Substraction {
         // difference: calculate
         this.difference = this.taskNumbers.get(0) - subtrahent;
     }
-/*
+
     private ArrayList<String> genErr() {
-        CalcError calculator = new CalcError(this.summand.get(0), this.summand.get(1), this.sum);
+        CalcError calculator = new CalcError(this.taskNumbers.get(0), this.taskNumbers.get(1), this.difference, "-");
         ArrayList<Integer> results = calculator.getResults();
         ArrayList<String> errorStrings = new ArrayList<>();
         for (int idx = 0; idx < results.size(); idx++) {
@@ -67,7 +66,7 @@ public class Substraction {
         }
         return errorStrings;
     }
-*/
+
     private String toQuestion() {
         String q = "Find the value of the difference!\n";
         q += this.taskNumbers.get(0);
