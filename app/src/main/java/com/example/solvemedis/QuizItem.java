@@ -3,6 +3,7 @@ package com.example.solvemedis;
 import java.util.Collections;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class QuizItem {
     private String question;
@@ -28,11 +29,21 @@ public class QuizItem {
             this.error = sum.error;
         }
         else if (diff.equals("normal")) {
-            int difBound = 100;
-            Substraction substraction = new Substraction(difBound);
-            this.question = substraction.question;
-            this.answer = substraction.answer;
-            this.error = substraction.error;
+            Random r = new Random();
+            if (r.nextInt(3) == 0) {
+                int sumBound = 100;
+                Sum sum = new Sum(sumBound);
+                this.question = sum.question;
+                this.answer = sum.answer;
+                this.error = sum.error;
+            }
+            else {
+                int difBound = 100;
+                Substraction substraction = new Substraction(difBound);
+                this.question = substraction.question;
+                this.answer = substraction.answer;
+                this.error = substraction.error;
+            }
         }
     }
 
