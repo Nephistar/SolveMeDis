@@ -10,26 +10,27 @@ import android.widget.TextView;
 import com.example.solvemedis.QuizItem;
 
 public class Math_Easy extends AppCompatActivity {
-    private Button back_button;
-    private Button answer_button_1;
+    // below are global variables to access them in different spots
+    private Button back_button;  // button for back (back button of phone also works)
+    private Button answer_button_1; // the 4 answer buttons
     private Button answer_button_2;
     private Button answer_button_3;
     private Button answer_button_4;
-    private TextView questionBox;
+    private TextView questionBox;  // to display the question
     private QuizItem quizItem = new QuizItem("easy"); // generate first question
     // this has to be global so the button event can check for the answer
-    private int score = 0;
-    private int wrong = 0;
-    private TextView score_screen;
-    private TextView wrong_screen;
+    private int score = 0;  // correct answers
+    private int wrong = 0;  // false answers
+    private TextView score_screen;  // to display correct answers
+    private TextView wrong_screen;  // to display false answers
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {  // on opening the new activity
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_math__easy);
+        setContentView(R.layout.activity_math__easy);  // set how the activity looks
         score_screen = (TextView) findViewById(R.id.score_easy);
-        wrong_screen = (TextView) findViewById(R.id.wrong_easy);
+        wrong_screen = (TextView) findViewById(R.id.wrong_easy);  // init the scores
         // below all Button events are made and populated
         back_button = (Button) findViewById(R.id.back_from_easy);
         back_button.setOnClickListener(new View.OnClickListener() {
@@ -86,8 +87,8 @@ public class Math_Easy extends AppCompatActivity {
 
     public void checkAnswer(int button){
         String answer = quizItem.getAns();
-        Button clicked_button = (Button) findViewById(button);
-        if(answer.equals((String)clicked_button.getText())){
+        Button clicked_button = (Button) findViewById(button);  // which button was clicked
+        if(answer.equals((String)clicked_button.getText())){  // check answer
             // correct answer clicked;
             score_up();
         }
@@ -95,29 +96,29 @@ public class Math_Easy extends AppCompatActivity {
             // wrong answer clicked
             wrong_up();
         }
-        quizItem = new QuizItem("easy");
-        fillQuestion(questionBox);
-        fillButtons();
+        quizItem = new QuizItem("easy");  // override the old question
+        fillQuestion(questionBox);  // fill question box again
+        fillButtons();  // fill the new answers to the buttons
     }
 
-    public void fillQuestion(TextView quest_field){
+    public void fillQuestion(TextView quest_field){  // sets the new question
         quest_field.setText(quizItem.getQuestion());
-    }
+    }  // this is an extra method in case the needs to be done more later
 
-    public void fillButtons(){
+    public void fillButtons(){  // set the new answers to the buttons
         answer_button_1.setText(quizItem.getOpt(0));
         answer_button_2.setText(quizItem.getOpt(1));
         answer_button_3.setText(quizItem.getOpt(2));
         answer_button_4.setText(quizItem.getOpt(3));
-    }
+    }  // this is an extra method in case the needs to be done more later
 
-    public void score_up(){
+    public void score_up(){  // increase score and change the displayed score
         score++;
         String text_score = "Right: "+ score;
         score_screen.setText(text_score);
     }
 
-    public void wrong_up(){
+    public void wrong_up(){  // increase negative score and change the displayed score
         wrong++;
         String text_score = "Wrong: "+ wrong;
         wrong_screen.setText(text_score);

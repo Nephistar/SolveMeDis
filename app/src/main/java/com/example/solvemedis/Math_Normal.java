@@ -9,19 +9,23 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class Math_Normal extends AppCompatActivity {
-    private Button back_button;
-    private Button answer_button_1;
+    // below are global variables to access them in different spots
+    private Button back_button;  // button for back (back button of phone also works)
+    private Button answer_button_1; // the 4 answer buttons
     private Button answer_button_2;
     private Button answer_button_3;
     private Button answer_button_4;
     private TextView questionBox;
     private QuizItem quizItem = new QuizItem("normal"); // generate first question
     // this has to be global so the button event can check for the answer
-    private int score = 0;
-    private int wrong = 0;
-    private TextView score_screen;
-    private TextView wrong_screen;
+    private int score = 0;  // correct answers
+    private int wrong = 0;  // false answers
+    private TextView score_screen;  // to display correct answers
+    private TextView wrong_screen;  // to display false answers
 
+    // -----------------------------------------------------------------------------
+    // FOR DETAILED INFO ON ALL BELOW CHECK NORMAL WHICH HAS NEAR IDENTICAL METHODS!
+    // -----------------------------------------------------------------------------
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
