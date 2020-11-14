@@ -27,7 +27,7 @@ public class Math_Hard extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_math__hard);
         score_screen = (TextView) findViewById(R.id.score_hard);
-        wrong_screen = (TextView) findViewById(R.id.wrong_normal);
+        wrong_screen = (TextView) findViewById(R.id.wrong_hard);
         number_input = (EditText) findViewById(R.id.number_input_hard);
         back_button = (Button) findViewById(R.id.back_from_hard);
         back_button.setOnClickListener(new View.OnClickListener() {
@@ -42,9 +42,11 @@ public class Math_Hard extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 checkAnswer(R.id.hard_answer_button_1);
-
+                number_input.setText("");
             }
         });
+        questionBox = (TextView) findViewById(R.id.question_box_hard);
+        fillQuestion(questionBox);
     }
 
     public void openHome(){

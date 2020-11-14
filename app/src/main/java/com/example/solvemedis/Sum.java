@@ -13,13 +13,15 @@ public class Sum {
     List<String> error;
     public Random rand;
 
-    Sum(Integer bound) {
+    Sum(Integer bound, boolean createError) {
         this.rand = new Random();
         this.bound = bound;
         this.sum = genSum();
         this.summand = new ArrayList<>(5);
         this.genSummands();
-        this.error = genErr();
+        if (createError) {
+            this.error = genErr();
+        }
         this.question = toQuestion();
         this.answer = toAnswer();
     }

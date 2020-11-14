@@ -13,13 +13,15 @@ public class Substraction {
     List<String> error;
     public Random rand;
 
-    Substraction(Integer bound) {
+    Substraction(Integer bound, boolean createError) {
         this.rand = new Random();
         this.bound = bound;
         this.taskNumbers = new ArrayList<>(5);
         this.taskNumbers.add(genMinuend());
         this.genSubtrahentDifference();
-        this.error = genErr();
+        if (createError) {
+            this.error = genErr();
+        }
         this.question = toQuestion();
         this.answer = toAnswer();
     }
@@ -49,7 +51,7 @@ public class Substraction {
 
     private void genSubtrahentDifference() {
         //Subtrahent: random number smaller than sum
-        int subtrahent = this.rand.nextInt(this.taskNumbers.get(0) - 1);
+        int subtrahent = this.rand.nextInt(this.taskNumbers.get(0) - 2) + 1;
         this.taskNumbers.add(subtrahent);
         // difference: calculate
         this.difference = this.taskNumbers.get(0) - subtrahent;

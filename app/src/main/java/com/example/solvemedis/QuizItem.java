@@ -23,7 +23,7 @@ public class QuizItem {
     private void genQ(String diff) {
         if (diff.equals("easy")) {
             int sumBound = 100;
-            Sum sum = new Sum(sumBound);
+            Sum sum = new Sum(sumBound, true);
             this.question = sum.question;
             this.answer = sum.answer;
             this.error = sum.error;
@@ -32,17 +32,32 @@ public class QuizItem {
             Random r = new Random();
             if (r.nextInt(3) == 0) {
                 int sumBound = 100;
-                Sum sum = new Sum(sumBound);
+                Sum sum = new Sum(sumBound, true);
                 this.question = sum.question;
                 this.answer = sum.answer;
                 this.error = sum.error;
             }
             else {
                 int difBound = 100;
-                Substraction substraction = new Substraction(difBound);
+                Substraction substraction = new Substraction(difBound, true);
                 this.question = substraction.question;
                 this.answer = substraction.answer;
                 this.error = substraction.error;
+            }
+        }
+        else if (diff.equals("hard")) {
+            Random r = new Random();
+            if (r.nextInt(3) == 0) {
+                int sumBound = 100;
+                Sum sum = new Sum(sumBound, false);
+                this.question = sum.question;
+                this.answer = sum.answer;
+            }
+            else {
+                int difBound = 100;
+                Substraction substraction = new Substraction(difBound, false);
+                this.question = substraction.question;
+                this.answer = substraction.answer;
             }
         }
     }
