@@ -87,7 +87,7 @@ public class Math_Hard extends AppCompatActivity {
 
     public void score_up(){  // increase score and change the displayed score
         score++;
-        String text_score = "Points "+ score;
+        String text_score = "Right: "+ score;
         score_screen.setText(text_score);
     }
 

@@ -114,7 +114,7 @@ public class Math_Normal extends AppCompatActivity {
 
     public void score_up(){
         score++;
-        String text_score = "Points "+ score;
+        String text_score = "Right: "+ score;
         score_screen.setText(text_score);
     }
 
