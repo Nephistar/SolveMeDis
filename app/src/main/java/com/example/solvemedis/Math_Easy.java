@@ -2,12 +2,14 @@ package com.example.solvemedis;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import com.example.solvemedis.QuizItem;
+import com.example.solvemedis.AsyncRequester;
 
 public class Math_Easy extends AppCompatActivity {
     // below are global variables to access them in different spots
@@ -23,6 +25,7 @@ public class Math_Easy extends AppCompatActivity {
     private int wrong = 0;  // false answers
     private TextView score_screen;  // to display correct answers
     private TextView wrong_screen;  // to display false answers
+    private Context mContext = this;
 
 
     @Override
@@ -45,6 +48,8 @@ public class Math_Easy extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 checkAnswer(R.id.easy_answer_button_1);
+                AsyncRequester requester = new AsyncRequester(mContext); // Todo: REMOVE TEST HERE
+                String response = requester.doInBackground("get", "highscore"); // Todo: REMOVE TEST HERE
 
             }
         });
