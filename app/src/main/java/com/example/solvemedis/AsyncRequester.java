@@ -22,6 +22,9 @@ class AsyncRequester extends AsyncTask<String, Void, String> {
         // empty HashMap, if no desired Value has to be send -> could also be solved by default in func
         HashMap<String, String> param = new HashMap<>();
         String url = params[0];
+        if(params.length > 2){
+                param.put(params[1], params[2]);
+        }
         return handler.make_request(url, params[1], param);
     }
 

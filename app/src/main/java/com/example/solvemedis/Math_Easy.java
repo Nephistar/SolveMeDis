@@ -58,6 +58,8 @@ public class Math_Easy extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 checkAnswer(R.id.easy_answer_button_2);
+                AsyncRequester requester = new AsyncRequester(mContext); // Todo: REMOVE TEST HERE
+                String response = requester.doInBackground("put", "highscore", "10"); // Todo: REMOVE TEST HERE
 
             }
         });

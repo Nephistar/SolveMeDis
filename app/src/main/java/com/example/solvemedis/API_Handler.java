@@ -8,6 +8,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.Console;
@@ -17,7 +19,7 @@ import java.util.Map;
 public class API_Handler {
     private String api_response;
     private RequestQueue queue;
-    private String url = "http://127.0.0.1:35678/home/";
+    private String url = "http://192.168.178.75:35678/home/";
 
 
     API_Handler(Context context){
@@ -50,7 +52,7 @@ public class API_Handler {
 
     public void get_request(String request_id){
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-                (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+                (Request.Method.GET, url + request_id, null, new Response.Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject response) {
@@ -73,7 +75,7 @@ public class API_Handler {
     // todo: ALL URLs have a request ID -> solve this b4 doing testing!
     public String put_request(String request_id, final HashMap<String, String> param){
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-                (Request.Method.PUT, url + request_id, null, new Response.Listener<JSONObject>() {
+                (Request.Method.PUT, url + request_id, create_data(param), new Response.Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject response) {
@@ -102,7 +104,7 @@ public class API_Handler {
     }
     public String post_request(String request_id, final HashMap<String, String> param){
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-                (Request.Method.POST, url + request_id, null, new Response.Listener<JSONObject>() {
+                (Request.Method.POST, url + request_id, create_data(param), new Response.Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject response) {
@@ -149,5 +151,11 @@ public class API_Handler {
         );
         queue.add(jsonObjectRequest);
         return api_response;
+    }
+
+    private JSONObject create_data(HashMap<String, String> data){
+        JSONObject object = new JSONObject();
+        //input your API parameters
+        return new JSONObject(data);
     }
 }
